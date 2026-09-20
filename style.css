@@ -405,7 +405,57 @@ input[type="number"]::-webkit-outer-spin-button {
     letter-spacing: 6px;
 }
 
-/* ── GAME OVER ── */
+/* ── SECONDARY BUTTON ── */
+.btn-secondary {
+    background: rgba(255,255,255,0.08);
+    color: #ffd700;
+    border: 2px solid rgba(255,215,0,0.4);
+    border-radius: 30px;
+    padding: 14px 36px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+}
+
+.btn-secondary:hover {
+    background: rgba(255,215,0,0.15);
+    border-color: #ffd700;
+    transform: scale(1.05);
+}
+
+/* ── SCOREBOARD ── */
+.score-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.score-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 10px 16px;
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.score-row.score-top {
+    background: rgba(255,215,0,0.1);
+    border-color: rgba(255,215,0,0.4);
+}
+
+.score-rank  { min-width: 28px; font-size: 1.1rem; }
+.score-name  { flex: 1; font-weight: bold; color: #e0e0ff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.score-stars { color: #ffd700; letter-spacing: 2px; }
+.score-pts   { color: #ffd700; font-weight: bold; min-width: 60px; text-align: right; }
+.score-status { font-size: 0.8rem; color: #aaa; min-width: 80px; text-align: right; }
+
 .gameover-title {
     font-size: 2rem;
     color: #ef5350;

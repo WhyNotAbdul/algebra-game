@@ -25,6 +25,7 @@
                 <p>❤️ 3 Lives &nbsp;|&nbsp; ⭐ 10pts per correct answer &nbsp;|&nbsp; 🗝️ Collect 4 keys to escape</p>
             </div>
             <button class="btn-primary" onclick="startGame()">🚪 Enter the School</button>
+            <button class="btn-secondary" onclick="window.location.href='scoreboard.html'">🏆 View Scoreboard</button>
         </div>
 
         <!-- SCREEN: Level 1 – Keypad -->
@@ -111,11 +112,14 @@
             <h1 class="win-title">ESCAPE SUCCESSFUL!</h1>
             <p class="win-subtitle">🔓 THE MATHS SCHOOL IS UNLOCKED!</p>
             <div class="win-score-box">
-                <p>Final Score: <span id="final-score" class="final-score-value">0</span> / 100</p>
+                <p>Final Score: <span id="final-score" class="final-score-value">0</span> / <span id="max-score">40</span></p>
                 <p id="win-keys">🗝️ Keys Collected: 4/4</p>
             </div>
             <div class="stars" id="win-stars"></div>
-            <button class="btn-primary" onclick="restartGame()">🔄 Play Again</button>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+                <button class="btn-primary" onclick="restartGame()">🔄 Play Again</button>
+                <button class="btn-secondary" onclick="window.location.href='scoreboard.html'">🏆 Scoreboard</button>
+            </div>
         </div>
 
         <!-- SCREEN: Game Over -->

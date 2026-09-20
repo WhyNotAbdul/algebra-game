@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoreboard – Algebra Escape Room</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div class="screen active" style="padding-top: 40px;">
+            <div class="room-art">🏆</div>
+            <h1 style="color:#ffd700;text-align:center;font-size:2rem;">Scoreboard</h1>
+            <div id="scoreboard-table" style="width:100%;max-width:420px;"></div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px;">
+                <button class="btn-primary" onclick="window.location.href='index.html'">🚪 Play Again</button>
+                <button class="btn-secondary" onclick="clearScores()">🗑️ Clear Scores</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function loadScores() {
+            return JSON.parse(localStorage.getItem('algebraEscapeScores') || '[]');
+        }
+
+        function renderScores() {
+            const scores = loadScores();
+            const container = document.getElementById('scoreboard-table');
+
+            if (scores.length === 0) {
+                container.innerHTML = '<p style="color:#aaa;text-align:center;padding:20px;">No scores yet. Play the game first!</p>';
+                return;
+            }
+
+            const rows = scores
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 10)
+                .map((entry, i) => {
+                    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}.`;
+                    const stars = entry.score >= 40 ? '⭐⭐⭐' : entry.score >= 30 ? '⭐⭐' : '⭐';
+                    const status = entry.escaped ? '🔓 Escaped' : '💀 Caught';
+                    return `
+                        <div class="score-row ${i === 0 ? 'score-top' : ''}">
+                            <span class="score-rank">${medal}</span>
+                            <span class="score-name">${entry.name}</span>
+                            <span class="score-stars">${stars}</span>
+                            <span class="score-pts">${entry.score} pts</span>
+                            <span class="score-status">${status}</span>
+                        </div>`;
+                }).join('');
+
+            container.innerHTML = `<div class="score-list">${rows}</div>`;
+        }
+
+        function clearScores() {
+            if (confirm('Clear all scores?')) {
+                localStorage.removeItem('algebraEscapeScores');
+                renderScores();
+            }
+        }
+
+        renderScores();
+    </script>
+</body>
+</html>

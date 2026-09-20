@@ -66,8 +66,16 @@ function addScore(points) {
     updateHUD();
 }
 
+function saveScore(escaped) {
+    const name = prompt('Enter your name for the scoreboard:', 'Player') || 'Anonymous';
+    const scores = JSON.parse(localStorage.getItem('algebraEscapeScores') || '[]');
+    scores.push({ name: name.trim().slice(0, 20), score: state.score, escaped, date: new Date().toLocaleDateString() });
+    localStorage.setItem('algebraEscapeScores', JSON.stringify(scores));
+}
+
 function gameOver() {
     document.getElementById('gameover-score').textContent = state.score;
+    saveScore(false);
     transitionTo('screen-gameover', '💀');
 }
 
@@ -237,10 +245,11 @@ function checkLevel4() {
 function showWinScreen() {
     document.getElementById('final-score').textContent = state.score;
 
-    const stars = state.score >= 40 ? '⭐⭐⭐' :
-                  state.score >= 25 ? '⭐⭐' : '⭐';
+    const stars = (state.score >= 40 && state.lives === 3) ? '⭐⭐⭐' :
+                  (state.score >= 40 && state.lives === 2) ? '⭐⭐' : '⭐';
     document.getElementById('win-stars').textContent = stars;
 
+    saveScore(true);
     transitionTo('screen-win', '🏆');
 }
 
